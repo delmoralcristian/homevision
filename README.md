@@ -10,6 +10,7 @@ This application is in charge of houses management.
 
 * Basic API security implemented
 * Added swagger for API documentation
+* For simplicity the images are downloaded in the tmp/ directory
 
 ### How do I get set up? ###
 

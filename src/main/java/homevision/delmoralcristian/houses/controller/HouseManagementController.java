@@ -37,6 +37,7 @@ public class HouseManagementController {
 
     @RequestMapping(value = "/houses/photo/download", method = RequestMethod.GET)
     @ApiOperation(value = "Download houses photo")
+    //TODO: for simplicity the images are downloaded in the tmp/ directory
     public ResponseEntity<?> downloadHousePhotos(@ApiParam(value = "The page number you want to retrieve (default is 1)")
                                                               @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                                       @ApiParam(value = "The number of houses per page (default is 100)")
