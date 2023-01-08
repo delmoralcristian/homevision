@@ -1,5 +1,6 @@
 package homevision.delmoralcristian.houses.service.impl;
 
+import homevision.delmoralcristian.houses.aspect.RetryAPICall;
 import homevision.delmoralcristian.houses.dto.HousesAPIRootResponseDTO;
 import homevision.delmoralcristian.houses.enums.CommonMessage;
 import homevision.delmoralcristian.houses.exceptions.InternalServerErrorException;
@@ -25,6 +26,7 @@ public class APIServiceImpl implements APIService {
     private String apiHousesUrl;
 
     @Override
+    @RetryAPICall
     public HousesAPIRootResponseDTO getHouses(Integer page, Integer perPage) {
         HousesAPIRootResponseDTO responseDTO;
         try {
