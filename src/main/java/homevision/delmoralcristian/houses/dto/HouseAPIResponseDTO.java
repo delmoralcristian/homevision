@@ -1,6 +1,8 @@
 package homevision.delmoralcristian.houses.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Setter
 @Getter
@@ -11,6 +13,6 @@ public class HouseAPIResponseDTO {
     private String address;
     private String homeowner;
     private int price;
-    private String photoUrl;
+    private String photoURL;
 
 }

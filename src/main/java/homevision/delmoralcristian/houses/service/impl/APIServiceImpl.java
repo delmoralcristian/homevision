@@ -2,10 +2,11 @@ package homevision.delmoralcristian.houses.service.impl;
 
 import homevision.delmoralcristian.houses.dto.HousesAPIRootResponseDTO;
 import homevision.delmoralcristian.houses.enums.CommonMessage;
-import homevision.delmoralcristian.houses.exceptions.APICallException;
+import homevision.delmoralcristian.houses.exceptions.InternalServerErrorException;
 import homevision.delmoralcristian.houses.service.APIService;
 import homevision.delmoralcristian.houses.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +29,17 @@ public class APIServiceImpl implements APIService {
         HousesAPIRootResponseDTO responseDTO;
         try {
             log.info("Calling get houses endpoint API");
-            String urlFormatted = MessageFormat.format(apiHousesUrl, String.valueOf(page), String.valueOf(perPage));
-            URL url = new URL(urlFormatted);
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            var urlFormatted = MessageFormat.format(apiHousesUrl, String.valueOf(page), String.valueOf(perPage));
+            var url = new URL(urlFormatted);
+            var http = (HttpURLConnection) url.openConnection();
             http.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream()));
-            String responseBodyForecast = br.lines().collect(Collectors.joining());
-            responseDTO = JsonUtils.fromJsonRequest(responseBodyForecast, HousesAPIRootResponseDTO.class);
+            var br = new BufferedReader(new InputStreamReader(http.getInputStream()));
+            var responseBody = br.lines().collect(Collectors.joining());
+            responseDTO = JsonUtils.fromJsonRequest(responseBody, HousesAPIRootResponseDTO.class);
             http.disconnect();
 
         } catch (Exception e) {
-            throw new APICallException(CommonMessage.API_CALL_ERROR.getMessage());
+            throw new InternalServerErrorException(CommonMessage.API_CALL_ERROR.getMessage());
         }
         return responseDTO;
     }
